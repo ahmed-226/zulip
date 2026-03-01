@@ -429,3 +429,15 @@ def get_temporary_url_for_uploaded_file() -> dict[str, object]:
         realm_id = upload_path_parts[1]
         filename = upload_path_parts[2]
     return {"realm_id_str": realm_id, "filename": filename}
+
+
+
+@openapi_param_value_generator(["/default_stream_groups/create:post"])
+def create_default_stream_group_data() -> dict[str, object]:
+    helpers.subscribe(helpers.example_user("iago"), "new_test_stream")
+    
+    return {
+        "group_name": "Marketing",  
+        "description": "Default channels for the marketing team.",
+        "stream_names": ["new_test_stream"],
+    }
